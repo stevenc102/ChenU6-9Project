@@ -1,2 +1,8 @@
-package PACKAGE_NAME;public class Tile {
+public class Tile extends Game{
+    private int numBombs;
+
+    public Tile() {
+        super();
+
+    }
 }

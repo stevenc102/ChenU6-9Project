@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class Bomb {
+public class Bomb extends Tile{
+    public Bomb() {
+        super();
+    }
 }
