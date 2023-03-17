@@ -1,10 +1,15 @@
 public class Board {
-    public int height;
-    public int width;
+    private int rows;
+    private int columns;
+
+    private int[][] board;
     public Board(int height, int width) {
-        this.height = height;
-        this.width = width;
+        this.rows = height;
+        this.columns = width;
+        board = new int[height][width];
     }
+
+
 
 
 }
