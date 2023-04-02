@@ -2,15 +2,17 @@ public class Board {
     private int rows;
     private int columns;
 
+    private int bombs;
     private int[][] board;
     public Board(int height, int width) {
         this.rows = height;
         this.columns = width;
+        bombs = (int)(rows * columns * 0.21);
         board = new int[height][width];
     }
 
     public void initBoard() {
-        int bombs = (int)(rows * columns * 0.21);
+        int bombs = this.bombs;
         while(bombs > 0) {
             for (int i = 0 ; i < board.length; i++) {
                 for (int j = 0; j < board[i].length; j++) {
@@ -70,5 +72,8 @@ public class Board {
         }
     }
 
+    public int getBombs() {
+        return bombs;
+    }
 
 }
