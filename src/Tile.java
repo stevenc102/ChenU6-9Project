@@ -9,10 +9,15 @@ public class Tile implements ActionListener, MouseListener {
     private int num;
     private JButton button;
     private boolean isFlagged;
-
-    public Tile(int num) {
+    private int row;
+    private int col;
+    private boolean isRevealed;
+    public Tile(int num, int row, int col) {
         this.num = num;
         isFlagged = false;
+        this.row = row;
+        this.col = col;
+        isRevealed = false;
         initTile();
     }
 
@@ -32,10 +37,19 @@ public class Tile implements ActionListener, MouseListener {
         return isFlagged;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
     public void actionPerformed(ActionEvent ae){
         if (!isFlagged) {
             button.setEnabled(false);
             button.setBackground(Color.WHITE);
+            isRevealed = true;
             if (num > 0) {
                 button.setText("" + num);
             } else {
@@ -54,6 +68,27 @@ public class Tile implements ActionListener, MouseListener {
                 isFlagged = true;
                 button.setText("\uD83D\uDEA9");
                 GamePanel.bombsLeft --;
+            }
+        }
+    }
+
+    public boolean isRevealed() {
+        return isRevealed;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void reveal() {
+        if (!isFlagged) {
+            button.setEnabled(false);
+            button.setBackground(Color.WHITE);
+            isRevealed = true;
+            if (num > 0) {
+                button.setText("" + num);
+            } else {
+                button.setText("");
             }
         }
     }

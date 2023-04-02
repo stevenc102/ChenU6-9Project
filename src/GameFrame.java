@@ -9,9 +9,13 @@ public class GameFrame extends JFrame implements ActionListener {
     private GamePanel gamePanel;
     private Timer time;
     private JPanel blankPanel;
+    private static int highScore = 0;
     private int seconds;
+    private JButton restartButton;
     public GameFrame() {
         super();
+        restartButton = new JButton("Restart");
+        restartButton.addActionListener(this);
         minesweeper = new Game();
         gamePanel = new GamePanel(minesweeper);
         setUpFrame();
@@ -27,31 +31,69 @@ public class GameFrame extends JFrame implements ActionListener {
         setSize(600, 400);
         setTitle("Minesweeper");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        for (Tile tile : gamePanel.getTiles()) {
-            add(tile.getButton());
+        for (Tile[] tileArray : gamePanel.getTiles()) {
+            for (Tile tile : tileArray) {
+                add(tile.getButton());
+            }
         }
         setLayout(new GridLayout(16, 16));
         setVisible(true);
     }
 
     public void initGame() {
-        while(!gamePanel.checkLost()) {
-            if (seconds % 3 == 0) {
+        while(!gamePanel.checkLost() && !gamePanel.checkWon()) {
+            if (seconds % 2 == 0) {
                 setTitle("Minesweeper: " + GamePanel.bombsLeft + " bombs left");
+                gamePanel.revealBlank();
             }
         }
-        dispose();
-        JFrame frame = new JFrame();
-        frame.setSize(600, 400);
-        frame.setTitle("Minesweeper");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new JLabel("YOU LOSE", SwingConstants.CENTER));
-        frame.setVisible(true);
+
+        if (gamePanel.checkLost()) {
+            JFrame frame = new JFrame();
+            frame.setSize(600, 400);
+            frame.setTitle("Minesweeper");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLayout(new GridLayout(2, 2));
+            frame.add(new JLabel("YOU LOSE", SwingConstants.CENTER));
+            frame.add(new JLabel("Time taken: " + seconds), SwingConstants.CENTER);
+            if (highScore != 0) {
+                frame.add(new JLabel("Current highscore: " + highScore + " seconds"), SwingConstants.CENTER);
+            } else {
+                frame.add(new JLabel("There is currently no highscore :("), SwingConstants.CENTER);
+            }
+            frame.add(restartButton);
+            frame.setVisible(true);
+        } else {
+            highScore = seconds;
+            JFrame frame = new JFrame();
+            frame.setSize(600, 400);
+            frame.setTitle("Minesweeper");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLayout(new GridLayout(2, 2));
+            frame.add(new JLabel("YOU WIN", SwingConstants.CENTER));
+            frame.add(new JLabel("Time taken: " + seconds), SwingConstants.CENTER);
+            if (highScore != 0) {
+                frame.add(new JLabel("Current highscore: " + highScore + " seconds"), SwingConstants.CENTER);
+            } else {
+                frame.add(new JLabel("There is currently no highscore :("), SwingConstants.CENTER);
+            }
+            frame.add(restartButton);
+            frame.setVisible(true);
+        }
     }
 
     private void timerFires() {
         seconds++;
     }
 
-    public void actionPerformed(ActionEvent e) {}
+    public void actionPerformed(ActionEvent e) {
+        restartButton = new JButton("Restart");
+        restartButton.addActionListener(this);
+        minesweeper = new Game();
+        gamePanel = new GamePanel(minesweeper);
+        setUpFrame();
+        blankPanel = new JPanel();
+        seconds = 0;
+        initGame();
+    }
 }

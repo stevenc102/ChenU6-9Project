@@ -5,8 +5,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.*;
 public class Bomb extends Tile implements ActionListener{
     private boolean lost;
-    public Bomb() {
-        super(9);
+    public Bomb(int row, int col) {
+        super(9, row, col);
         lost = false;
     }
 
