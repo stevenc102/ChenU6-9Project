@@ -47,10 +47,8 @@ public class GameFrame extends JFrame implements ActionListener {
     public void initGame() {
         gamePanel.revealRandom();
         while(!gamePanel.checkLost() && !gamePanel.checkWon()) {
-
-                setTitle("Minesweeper: " + GamePanel.bombsLeft + " bombs left");
-                gamePanel.revealBlank();
-
+            setTitle("Minesweeper: " + GamePanel.bombsLeft + " bombs left");
+            gamePanel.revealBlank();
         }
 
         if (gamePanel.checkLost() && temp) {
@@ -93,21 +91,15 @@ public class GameFrame extends JFrame implements ActionListener {
         Object source = e.getSource();
         if (source instanceof JButton) {
             if (((JButton)source).getText().equals("Restart")) {
-                restart = true;
-//
-//             }
+                    restart = true;
             }
-        } else if (source instanceof Timer) {
+            } else if (source instanceof Timer) {
             seconds++;
         }
     }
 
     public boolean getRestart() {
         return restart;
-    }
-
-    public void setRestart(boolean b) {
-        restart = b;
     }
 
     public void removeFrame() {
