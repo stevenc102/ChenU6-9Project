@@ -21,6 +21,7 @@ public class GameFrame extends JFrame implements ActionListener {
         setUpFrame();
         blankPanel = new JPanel();
         seconds = 0;
+        initGame();
     }
 
 
@@ -49,6 +50,7 @@ public class GameFrame extends JFrame implements ActionListener {
         }
 
         if (gamePanel.checkLost()) {
+            gamePanel.endGame();
             JFrame frame = new JFrame();
             frame.setSize(600, 400);
             frame.setTitle("Minesweeper");
@@ -64,6 +66,7 @@ public class GameFrame extends JFrame implements ActionListener {
             frame.add(restartButton);
             frame.setVisible(true);
         } else {
+            gamePanel.endGame();
             highScore = seconds;
             JFrame frame = new JFrame();
             frame.setSize(600, 400);
@@ -87,13 +90,31 @@ public class GameFrame extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        restartButton = new JButton("Restart");
-        restartButton.addActionListener(this);
-        minesweeper = new Game();
-        gamePanel = new GamePanel(minesweeper);
-        setUpFrame();
-        blankPanel = new JPanel();
-        seconds = 0;
-        initGame();
+        Object source = e.getSource();
+        if (source instanceof JButton) {
+            if (((JButton)source).getText().equals("Restart")) {
+                dispose();
+                minesweeper = new Game();
+                GamePanel gamePanel2 = new GamePanel(minesweeper);
+                JFrame temp = new JFrame();
+                temp.add(gamePanel2);
+                temp.setSize(600, 400);
+                temp.setTitle("Minesweeper");
+                temp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                for (Tile[] tileArray : gamePanel.getTiles()) {
+                    for (Tile tile : tileArray) {
+                        temp.add(tile.getButton());
+                    }
+                }
+                temp.setLayout(new GridLayout(16, 16));
+                seconds = 0;
+                temp.setVisible(true);
+                System.out.println(gamePanel2.checkLost());
+                System.out.println(gamePanel2.checkWon());
+
+//
+//                }
+            }
+        }
     }
 }

@@ -60,6 +60,14 @@ public class GamePanel extends JPanel{
         return true;
     }
 
+    public void endGame() {
+        for (int i = 0; i < tiles.length; i++) {
+            for (int j = 0; j < tiles[i].length; j++) {
+                tiles[i][j].setDisabled();
+            }
+        }
+    }
+
     public void revealBlank() {
         boolean temp = false;
         for (Tile[] tileArray : tiles) {

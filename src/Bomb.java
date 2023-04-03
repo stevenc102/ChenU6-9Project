@@ -22,5 +22,10 @@ public class Bomb extends Tile implements ActionListener{
         lost = true;
     }
 
+    public void setDisabled() {
+       getButton().setEnabled(false);
+       getButton().setBackground(Color.red);
+       getButton().setText("💣");
 
+    }
 }

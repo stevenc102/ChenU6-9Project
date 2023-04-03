@@ -93,6 +93,16 @@ public class Tile implements ActionListener, MouseListener {
         }
     }
 
+    public void setDisabled() {
+        button.setEnabled(false);
+        button.setBackground(Color.WHITE);
+        if (num > 0) {
+            button.setText("" + num);
+        } else {
+            button.setText("");
+        }
+    }
+
     public void mousePressed(MouseEvent e) {
 
     }
