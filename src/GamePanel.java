@@ -48,10 +48,10 @@ public class GamePanel extends JPanel{
     }
 
     public boolean checkWon() {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j++) {
-                if (tiles[i][j].getNum() != 0 && tiles[i][j].getNum() != 9) {
-                    if (!tiles[i][j].isRevealed()) {
+        for (Tile[] tile : tiles) {
+            for (Tile value : tile) {
+                if (value.getNum() != 0 && value.getNum() != 9) {
+                    if (!value.isRevealed()) {
                         return false;
                     }
                 }
@@ -61,9 +61,9 @@ public class GamePanel extends JPanel{
     }
 
     public void endGame() {
-        for (int i = 0; i < tiles.length; i++) {
-            for (int j = 0; j < tiles[i].length; j++) {
-                tiles[i][j].setDisabled();
+        for (Tile[] tile : tiles) {
+            for (Tile value : tile) {
+                value.setDisabled();
             }
         }
     }
