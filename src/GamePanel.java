@@ -119,10 +119,13 @@ public class GamePanel extends JPanel{
 
     public void revealRandom() {
         boolean first = true;
-        for (Tile[] tileArray : tiles) {
-            for (Tile tile : tileArray) {
-                if (first && (((int)(Math.random() * 19)) + 1) == 1 && tile.getNum() == 0) {
-                    tile.reveal();
+        while(first) {
+            for (Tile[] tileArray : tiles) {
+                for (Tile tile : tileArray) {
+                    if (first && (((int) (Math.random() * 19)) + 1) == 1 && tile.getNum() == 0) {
+                        tile.reveal();
+                        first = false;
+                    }
                 }
             }
         }
