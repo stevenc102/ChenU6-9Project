@@ -113,7 +113,19 @@ public class GamePanel extends JPanel{
         return tiles;
     }
 
+    public Game getGame() {
+        return minesweeper;
+    }
 
-
+    public void revealRandom() {
+        boolean first = true;
+        for (Tile[] tileArray : tiles) {
+            for (Tile tile : tileArray) {
+                if (first && (((int)(Math.random() * 19)) + 1) == 1 && tile.getNum() == 0) {
+                    tile.reveal();
+                }
+            }
+        }
+    }
 
 }

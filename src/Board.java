@@ -1,9 +1,9 @@
 public class Board {
-    private int rows;
-    private int columns;
+    private final int rows;
+    private final int columns;
 
-    private int bombs;
-    private int[][] board;
+    private final int bombs;
+    private final int[][] board;
     public Board(int height, int width) {
         this.rows = height;
         this.columns = width;
@@ -45,12 +45,10 @@ public class Board {
     }
 
     private void incrementAdjacent(int row, int col) {
-        int r = row;
-        int c = col;
-        int startR = r - 1;
-        int endR = r + 1;
-        int startC = c - 1;
-        int endC = c + 1;
+        int startR = row - 1;
+        int endR = row + 1;
+        int startC = col - 1;
+        int endC = col + 1;
         if (startR < 0) {
             startR = 0;
         }

@@ -1,7 +1,8 @@
 
 public class Main {
     public static void main(String[] args) {
-        GameFrame g = new GameFrame();
+        SuperMinesweeper s = new SuperMinesweeper();
+        s.initGame();
 
     }
 }
