@@ -2,7 +2,7 @@
 public class Game{
     private final Board board;
     public Game() {
-        board = new Board(5, 5);
+        board = new Board(8, 8);
         board.initBoard();
     }
 

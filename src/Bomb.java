@@ -1,8 +1,7 @@
-import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.*;
-import java.awt.event.MouseEvent;
+
 
 public class Bomb extends Tile implements ActionListener{
     private boolean lost;
