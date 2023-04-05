@@ -1,6 +1,5 @@
-import javax.swing.*;
 
-public class GamePanel extends JPanel{
+public class GamePanel{
 
     public static int bombsLeft;
     private Game minesweeper;
