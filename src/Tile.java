@@ -59,7 +59,7 @@ public class Tile implements ActionListener, MouseListener {
     }
 
     public void mouseClicked(MouseEvent me) {
-        if (SwingUtilities.isRightMouseButton(me)) {
+        if (SwingUtilities.isRightMouseButton(me) && !isRevealed) {
             if (button.getText().equals("\uD83D\uDEA9")){
                 isFlagged = false;
                 button.setText("");
